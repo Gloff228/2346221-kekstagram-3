@@ -16,16 +16,11 @@ const closeEditorButton = editor.querySelector('#upload-cancel');
 
 const openEditor = function() {
   const uploadedImage =  document.querySelector('#upload-file').files[0];
-  const fileReader = new FileReader();
   createSlider();
 
   body.classList.add('modal-open');
   editor.classList.remove('hidden');
-
-  fileReader.onloadend = function() {
-    preview.src = fileReader.result;
-  };
-  fileReader.readAsDataURL(uploadedImage);
+  preview.src = URL.createObjectURL(uploadedImage);
 
   onEditorEscKeydown = escKeydownHandler(document, closeEditor);
   effects.addEventListener('change', onEffectButtonClick);

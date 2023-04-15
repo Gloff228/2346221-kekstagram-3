@@ -2,7 +2,9 @@ import {escKeydownHandler} from './util.js';
 import {pristine} from './form-validator.js';
 import {onEffectButtonClick, setEffect, createSlider, destroySlider} from './effects-setting.js';
 import {onControlBiggerButtonClick, onControlSmallerButtonClick, setPictureScale} from './picture-scale.js';
+import {showErrorMessage} from './submit-message.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 let onEditorEscKeydown;
 const body = document.querySelector('body');
 const form = body.querySelector('#upload-select-image');
@@ -16,17 +18,30 @@ const closeEditorButton = editor.querySelector('#upload-cancel');
 
 const openEditor = function() {
   const uploadedImage =  document.querySelector('#upload-file').files[0];
-  createSlider();
-
+  const imageName = uploadedImage.name.toLowerCase();
+  console.log(imageName);
   body.classList.add('modal-open');
   editor.classList.remove('hidden');
-  preview.src = URL.createObjectURL(uploadedImage);
 
-  onEditorEscKeydown = escKeydownHandler(document, closeEditor);
-  effects.addEventListener('change', onEffectButtonClick);
-  scaleSmallerButton.addEventListener('click', onControlSmallerButtonClick);
-  scaleBiggerButton.addEventListener('click', onControlBiggerButtonClick);
-  closeEditorButton.addEventListener('click', closeEditor);
+  const matches = FILE_TYPES.some((it) => {
+    return imageName.endsWith(it);
+  });
+
+  if (matches) {
+    preview.src = URL.createObjectURL(uploadedImage);
+
+    createSlider();
+    onEditorEscKeydown = escKeydownHandler(document, closeEditor);
+    effects.addEventListener('change', onEffectButtonClick);
+    scaleSmallerButton.addEventListener('click', onControlSmallerButtonClick);
+    scaleBiggerButton.addEventListener('click', onControlBiggerButtonClick);
+    closeEditorButton.addEventListener('click', closeEditor);
+  } else {
+    body.classList.remove('modal-open');
+    editor.classList.add('hidden');
+    showErrorMessage('Неверный формат файла');
+  }
+
 }
 
 const closeEditor = function() {
@@ -49,4 +64,4 @@ const closeEditor = function() {
 
 uploadButton.addEventListener('change', openEditor);
 
-export {openEditor, closeEditor};
+export {closeEditor};

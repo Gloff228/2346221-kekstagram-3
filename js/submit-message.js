@@ -17,10 +17,12 @@ function showSuccessMessage() {
   successMessage.style.zIndex = '9999';
 }
 
-function showErrorMessage() {
+function showErrorMessage(text) {
   const errorMessage = errorMessageTemplate.cloneNode(true);
+  const errorTitle = errorMessage.querySelector('.error__title');
   const errorButton = errorMessage.querySelector('.error__button');
   errorButton.textContent = 'Закрыть';
+  errorTitle.textContent = text;
 
   errorButton.addEventListener('click', closeErrorMessage);
   onMessageEscKeydown = escKeydownHandler(document, closeErrorMessage);

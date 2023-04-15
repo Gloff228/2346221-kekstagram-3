@@ -9,7 +9,7 @@ loadPictures(
     drawPictures(picuturesInfo);
   },
   () => {
-    showErrorMessage();
+    showErrorMessage('Ошибка подключения к серверу');
   }
 );
 

@@ -79,7 +79,7 @@ function submitForm(onSuccess) {
           onSuccess();
         },
         () => {
-          showErrorMessage();
+          showErrorMessage('Ошибка загрузки файла');
           unblockSubmitButton();
         },
         sentInformation,

@@ -6,7 +6,7 @@ const errorMessageTemplate = body.querySelector('#error').content.querySelector(
 let onMessageEscKeydown;
 let onAnotherAreaClick;
 
-function showSuccessMessage() {
+const showSuccessMessage = function() {
   const successMessage = successMessageTemplate.cloneNode(true);
   const successButton = successMessage.querySelector('.success__button');
 
@@ -17,7 +17,7 @@ function showSuccessMessage() {
   successMessage.style.zIndex = '9999';
 }
 
-function showErrorMessage(text) {
+const showErrorMessage = function(text) {
   const errorMessage = errorMessageTemplate.cloneNode(true);
   const errorTitle = errorMessage.querySelector('.error__title');
   const errorButton = errorMessage.querySelector('.error__button');
@@ -31,7 +31,7 @@ function showErrorMessage(text) {
   errorMessage.style.zIndex = '9999';
 }
 
-function closeSuccessMessage() {
+const closeSuccessMessage = function() {
   const successButton = body.querySelector('.success__button');
 
   successButton.removeEventListener('click', closeSuccessMessage);
@@ -41,7 +41,7 @@ function closeSuccessMessage() {
   body.querySelector('.success').remove();
 }
 
-function closeErrorMessage() {
+const closeErrorMessage = function() {
   const errorButton = body.querySelector('.error__button');
 
   errorButton.removeEventListener('click', closeErrorMessage);

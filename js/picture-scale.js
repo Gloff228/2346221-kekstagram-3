@@ -1,7 +1,7 @@
 const preview = document.querySelector('.img-upload__preview img');
 const valueField = document.querySelector('.scale__control--value');
 
-const onControlSmallerButtonClick = () => {
+const onControlSmallerButtonClick = function() {
   let percent = valueField.value;
   percent = parseInt(percent.slice(0, -1), 10) - 25;
 
@@ -13,7 +13,7 @@ const onControlSmallerButtonClick = () => {
   }
 };
 
-const onControlBiggerButtonClick = () => {
+const onControlBiggerButtonClick = function() {
   let percent = valueField.value;
   percent = parseInt(percent.slice(0, -1), 10) + 25;
 
@@ -25,7 +25,7 @@ const onControlBiggerButtonClick = () => {
   }
 };
 
-function setPictureScale(value) {
+const setPictureScale = function(value) {
   preview.style.transform = `scale(${value/100})`;
 }
 

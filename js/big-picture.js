@@ -9,7 +9,7 @@ const bigPictureComments = bigPictureSection.querySelector('.comments-count');
 const bigPictureCloseButton = bigPictureSection.querySelector('.big-picture__cancel');
 const authorComment = bigPictureSection.querySelector('.social__caption');
 
-function onPictureClick(evt) {
+const onPictureClick = function(evt) {
   const element = evt.target.closest('.picture');
   if (element) {
     const image = element.querySelector('.picture__img');
@@ -33,7 +33,7 @@ function onPictureClick(evt) {
   }
 }
 
-function closeBigPicture() {
+const closeBigPicture = function() {
   bigPictureSection.classList.add('hidden');
   bigPictureCloseButton.removeEventListener('click', closeBigPicture);
   document.removeEventListener('keydown', onBigPictureEscKeydown);

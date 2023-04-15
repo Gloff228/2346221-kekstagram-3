@@ -1,12 +1,12 @@
-function checkLegitLength(string, minLength, maxLength) {
+const checkLegitLength = function(string, minLength, maxLength) {
   return string >= minLength && string <= maxLength;
 }
 
-function isEscapeKey(evt) {
+const isEscapeKey = function(evt) {
   return evt.key === 'Escape';
 }
 
-function escKeydownHandler(element, onKeydownFunction) {
+const escKeydownHandler = function(element, onKeydownFunction) {
   function eventHandler(evt) {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
@@ -18,8 +18,8 @@ function escKeydownHandler(element, onKeydownFunction) {
   return eventHandler;
 }
 
-function anotherAreaClickHandler(element, selector, onClickFunction) {
-  function eventHandler(evt) {
+const anotherAreaClickHandler = function(element, selector, onClickFunction) {
+  const eventHandler = function(evt) {
     if (evt.target === document.querySelector(selector)) {
       onClickFunction();
     }
@@ -29,7 +29,7 @@ function anotherAreaClickHandler(element, selector, onClickFunction) {
   return eventHandler;
 }
 
-function addPrewiewInformation(information) {
+const addPrewiewInformation = function(information) {
   const prewiew = document.querySelector('.img-upload__preview img');
   information.src = prewiew.src;
   information.scale = prewiew.style.transform;
@@ -37,7 +37,7 @@ function addPrewiewInformation(information) {
   information.filter = prewiew.style.filter;
 }
 
-function convertDataToInformation(formData) {
+const convertDataToInformation = function(formData) {
   const information = {
     description: formData.get('description'),
     hashtags: formData.get('hashtags')

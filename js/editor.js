@@ -14,7 +14,7 @@ const preview = editor.querySelector('.img-upload__preview img');
 const effects = editor.querySelector('.effects__list');
 const closeEditorButton = editor.querySelector('#upload-cancel');
 
-function openEditor() {
+const openEditor = function() {
   const uploadedImage =  document.querySelector('#upload-file').files[0];
   const fileReader = new FileReader();
   createSlider();
@@ -34,7 +34,7 @@ function openEditor() {
   closeEditorButton.addEventListener('click', closeEditor);
 }
 
-function closeEditor() {
+const closeEditor = function() {
   destroySlider();
   setEffect('none');
   setPictureScale(100);

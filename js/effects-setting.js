@@ -6,7 +6,7 @@ const slider = sliderBlock.querySelector('.effect-level__slider');
 const sliderValue = sliderBlock.querySelector('.effect-level__value');
 let selectedEffect = 'none';
 
-function createSlider() {
+const createSlider = function() {
   noUiSlider.create(slider, {
     range: {
       min: 0,
@@ -38,7 +38,7 @@ function createSlider() {
   sliderBlock.classList.add('hidden');
 }
 
-function changeSliderEffect() {
+const changeSliderEffect = function() {
   const effect = EFFECTS[selectedEffect];
   if (effect.name === 'none') {
     setPictureEffect(effect);
@@ -57,23 +57,23 @@ function changeSliderEffect() {
   }
 }
 
-function destroySlider() {
+const destroySlider = function() {
   slider.noUiSlider.destroy();
 }
 
-function onEffectButtonClick(evt) {
+const onEffectButtonClick = function(evt) {
   selectedEffect = evt.target.value;
   setEffect(selectedEffect);
 }
 
-function setEffect(effect) {
+const setEffect = function(effect) {
   selectedEffect = effect;
   preview.className = '';
   preview.classList.add(`effects__preview--${selectedEffect}`);
   changeSliderEffect();
 }
 
-function setPictureEffect(effect, value = 0) {
+const setPictureEffect = function(effect, value = 0) {
   if (effect.name === 'none') {
     preview.style.filter = '';
   } else {

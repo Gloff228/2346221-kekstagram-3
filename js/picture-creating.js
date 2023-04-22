@@ -3,7 +3,7 @@ import {onPictureClick} from './big-picture.js';
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureDisplay = document.querySelector('.pictures');
 
-const drawPictures = function(informationList) {
+const drawPictures = (informationList) => {
   const pictureFragment = document.createDocumentFragment();
 
   for (const information of informationList) {
@@ -24,7 +24,7 @@ const drawPictures = function(informationList) {
   pictureDisplay.addEventListener('click', onPictureClick);
 }
 
-const addPicture = function(information) {
+const addPicture = (information) => {
   const picture = pictureTemplate.cloneNode(true);
   const pictureImage = picture.querySelector('.picture__img');
   const pictureComments = picture.querySelector('.picture__comments');

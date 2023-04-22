@@ -1,6 +1,6 @@
 /*eslint arrow-body-style: ["error", "always"]*/
 
-const loadPictures = function(onSuccess, onFail) {
+const loadPictures = (onSuccess, onFail) => {
   fetch('https://27.javascript.pages.academy/kekstagram-simple/data')
     .then((response) => {
       return response.json();
@@ -13,7 +13,7 @@ const loadPictures = function(onSuccess, onFail) {
     });
 }
 
-const sendData = function(onSuccess, onFail, body) {
+const sendData = (onSuccess, onFail, body) => {
   fetch(
     'https://27.javascript.pages.academy/kekstagram-simple',
     {

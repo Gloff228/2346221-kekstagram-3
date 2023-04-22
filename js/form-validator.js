@@ -13,11 +13,11 @@ const pristine = new Pristine(form, {
   errorTextClass: 'form__error'
 });
 
-const validateCommentLength = function(value) {
+const validateCommentLength = (value) => {
   return checkLegitLength(value.length, 20, 140);
 }
 
-const validateHashTags = function(value) {
+const validateHashTags = (value) => {
   if (value.length === 0) {
     return true;
   }
@@ -54,17 +54,17 @@ pristine.addValidator(
   'Неверный формат ХэшТегов'
 );
 
-const blockSubmitButton = function() {
+const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Загружаю...';
 }
 
-const unblockSubmitButton = function() {
+const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = 'Опубликовать';
 }
 
-const submitForm = function(onSuccess) {
+const submitForm = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();

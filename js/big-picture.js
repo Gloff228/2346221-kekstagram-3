@@ -1,4 +1,4 @@
-import {escKeydownHandler, anotherAreaClickHandler} from './util.js';
+import {createOnEscKeydownFunction, createOnAnotherAreaClickFunction} from './util.js';
 
 let onBigPictureEscKeydown;
 let onAnotherAreaClick;
@@ -9,7 +9,7 @@ const bigPictureComments = bigPictureSection.querySelector('.comments-count');
 const bigPictureCloseButton = bigPictureSection.querySelector('.big-picture__cancel');
 const authorComment = bigPictureSection.querySelector('.social__caption');
 
-const onPictureClick = function(evt) {
+const onPictureClick = (evt) => {
   const element = evt.target.closest('.picture');
   if (element) {
     const image = element.querySelector('.picture__img');
@@ -28,12 +28,12 @@ const onPictureClick = function(evt) {
     bigPictureSection.classList.remove('hidden');
     bigPictureCloseButton.addEventListener('click', closeBigPicture);
 
-    onBigPictureEscKeydown = escKeydownHandler(document, closeBigPicture);
-    onAnotherAreaClick = anotherAreaClickHandler(document, '.big-picture', closeBigPicture);
+    onBigPictureEscKeydown = createOnEscKeydownFunction(document, closeBigPicture);
+    onAnotherAreaClick = createOnAnotherAreaClickFunction(document, '.big-picture', closeBigPicture);
   }
 }
 
-const closeBigPicture = function() {
+const closeBigPicture = () => {
   bigPictureSection.classList.add('hidden');
   bigPictureCloseButton.removeEventListener('click', closeBigPicture);
   document.removeEventListener('keydown', onBigPictureEscKeydown);

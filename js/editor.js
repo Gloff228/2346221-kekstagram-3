@@ -1,4 +1,4 @@
-import {escKeydownHandler} from './util.js';
+import {createOnEscKeydownFunction} from './util.js';
 import {pristine} from './form-validator.js';
 import {onEffectButtonClick, setEffect, createSlider, destroySlider} from './effects-setting.js';
 import {onControlBiggerButtonClick, onControlSmallerButtonClick, setPictureScale} from './picture-scale.js';
@@ -16,10 +16,9 @@ const preview = editor.querySelector('.img-upload__preview img');
 const effects = editor.querySelector('.effects__list');
 const closeEditorButton = editor.querySelector('#upload-cancel');
 
-const openEditor = function() {
+const openEditor = () => {
   const uploadedImage =  document.querySelector('#upload-file').files[0];
   const imageName = uploadedImage.name.toLowerCase();
-  console.log(imageName);
   body.classList.add('modal-open');
   editor.classList.remove('hidden');
 
@@ -31,7 +30,7 @@ const openEditor = function() {
     preview.src = URL.createObjectURL(uploadedImage);
 
     createSlider();
-    onEditorEscKeydown = escKeydownHandler(document, closeEditor);
+    onEditorEscKeydown = createOnEscKeydownFunction(document, closeEditor);
     effects.addEventListener('change', onEffectButtonClick);
     scaleSmallerButton.addEventListener('click', onControlSmallerButtonClick);
     scaleBiggerButton.addEventListener('click', onControlBiggerButtonClick);
@@ -44,7 +43,7 @@ const openEditor = function() {
 
 }
 
-const closeEditor = function() {
+const closeEditor = () => {
   destroySlider();
   setEffect('none');
   setPictureScale(100);

@@ -1,4 +1,4 @@
-import {escKeydownHandler, anotherAreaClickHandler} from './util.js';
+import {createOnEscKeydownFunction, createOnAnotherAreaClickFunction} from './util.js';
 
 const body = document.querySelector('body');
 const successMessageTemplate = body.querySelector('#success').content.querySelector('.success');
@@ -6,18 +6,18 @@ const errorMessageTemplate = body.querySelector('#error').content.querySelector(
 let onMessageEscKeydown;
 let onAnotherAreaClick;
 
-const showSuccessMessage = function() {
+const showSuccessMessage = () => {
   const successMessage = successMessageTemplate.cloneNode(true);
   const successButton = successMessage.querySelector('.success__button');
 
   successButton.addEventListener('click', closeSuccessMessage);
-  onMessageEscKeydown = escKeydownHandler(document, closeSuccessMessage);
-  onAnotherAreaClick = anotherAreaClickHandler(document, '.success', closeSuccessMessage);
+  onMessageEscKeydown = createOnEscKeydownFunction(document, closeSuccessMessage);
+  onAnotherAreaClick = createOnAnotherAreaClickFunction(document, '.success', closeSuccessMessage);
   body.append(successMessage);
   successMessage.style.zIndex = '9999';
 }
 
-const showErrorMessage = function(text) {
+const showErrorMessage = (text) => {
   const errorMessage = errorMessageTemplate.cloneNode(true);
   const errorTitle = errorMessage.querySelector('.error__title');
   const errorButton = errorMessage.querySelector('.error__button');
@@ -25,13 +25,13 @@ const showErrorMessage = function(text) {
   errorTitle.textContent = text;
 
   errorButton.addEventListener('click', closeErrorMessage);
-  onMessageEscKeydown = escKeydownHandler(document, closeErrorMessage);
-  onAnotherAreaClick = anotherAreaClickHandler(document, '.error', closeErrorMessage);
+  onMessageEscKeydown = createOnEscKeydownFunction(document, closeErrorMessage);
+  onAnotherAreaClick = createOnAnotherAreaClickFunction(document, '.error', closeErrorMessage);
   body.append(errorMessage);
   errorMessage.style.zIndex = '9999';
 }
 
-const closeSuccessMessage = function() {
+const closeSuccessMessage = () => {
   const successButton = body.querySelector('.success__button');
 
   successButton.removeEventListener('click', closeSuccessMessage);
@@ -41,7 +41,7 @@ const closeSuccessMessage = function() {
   body.querySelector('.success').remove();
 }
 
-const closeErrorMessage = function() {
+const closeErrorMessage = () => {
   const errorButton = body.querySelector('.error__button');
 
   errorButton.removeEventListener('click', closeErrorMessage);
